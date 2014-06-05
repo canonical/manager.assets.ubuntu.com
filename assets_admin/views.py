@@ -52,9 +52,8 @@ def index(request):
 def create(request):
     template = "create.html"
     error = ""
-    message = ""
     created_assets = []
-    existing_asset = {}
+    existing_assets = []
     tags = ''
 
     # Process form post
@@ -67,6 +66,8 @@ def create(request):
 
             # Create all files
             for asset_file in files:
+                template = "created.html"
+
                 try:
                     response = mapper.create(
                         asset_file.read(), asset_file.name, tags
@@ -74,8 +75,8 @@ def create(request):
 
                     if 'code' in response and response['code'] != 200:
                         if response['code'] == 409 and 'filename' in response:
-                            message = 'Asset already exists:'
-                            existing_asset = mapper.get(response['filename'])
+                            asset = mapper.get(response['filename'])
+                            existing_assets.append(asset)
                         else:
                             # Error - pass on message
                             error = 'Error: {message}'.format(
@@ -84,7 +85,6 @@ def create(request):
                     else:
                         # Success
                         created_assets.append(response)
-                        template = "created.html"
 
                 except RequestException as error:
                     api_error(error)
@@ -97,9 +97,8 @@ def create(request):
         template,
         {
             'error': error,
-            'message': message,
             'assets': created_assets,
-            'asset': existing_asset,
+            'existing': existing_assets,
             'tags': tags
         }
     )
