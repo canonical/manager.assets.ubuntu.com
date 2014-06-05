@@ -1,9 +1,10 @@
 {% extends "layout/default.html" %}
 
 {% block title %}Update tags{% endblock %}
-{% block heading %}Update tags{% endblock %}
 
 {% block content %}
+<h1>Update tags</h1>
+
 <form method="post">
     {% csrf_token %}
     <fieldset class="asset">

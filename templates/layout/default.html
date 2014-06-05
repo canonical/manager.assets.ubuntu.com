@@ -7,27 +7,34 @@
     </head>
 
     <body>
-        <nav>
-            <ul>
-                {% url 'index' as index_url %}
-                {% url 'create' as create_url %}
-                <li class="{% ifequal request.path index_url %}current{% endifequal %}">
-                    <a href="{{ index_url }}">search</a>
-                </li>
-                <li class="{% ifequal request.path create_url %}current{% endifequal %}">
-                    <a href="{{ create_url }}">create</a>
-                </li>
-            </ul>
-        </nav>
+        <header>
+            <h1>Asset manager</h1>
 
-        <h1>{% block heading %}NO HEADING{% endblock %}</h1>
+            <nav>
+                <ul>
+                    <li>
+                        <form class="search-form" action="/">
+                            <input id="input-search" type="search" name="q" placeholder="search assets" value="{{ query }}" />
+                        </form>
+                    </li>
+                    {% url 'create' as create_url %}
+                    <li class="{% ifequal request.path create_url %}current{% endifequal %}">
+                        <a href="{{ create_url }}">create new assets</a>
+                    </li>
+                </ul>
+            </nav>
 
-{% if error %}<p class="message error">{{ error }}</p>{% endif %}
-{% if message %}<p class="message">{{ message }}</p>{% endif %}
 
-        {% block content %}
-        YOU SHOULDN'T BE SEEING THIS
-        default.html SHOULD ONLY BE EXTENDED, NEVER CALLED DIRECTLY
-        {% endblock %}
+        </header>
+
+        <main>
+            {% if error %}<p class="message error">{{ error }}</p>{% endif %}
+            {% if message %}<p class="message">{{ message }}</p>{% endif %}
+
+            {% block content %}
+            YOU SHOULDN'T BE SEEING THIS
+            default.html SHOULD ONLY BE EXTENDED, NEVER CALLED DIRECTLY
+            {% endblock %}
+        </main>
     </body>
 </html>
