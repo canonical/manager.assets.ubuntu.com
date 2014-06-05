@@ -1,0 +1,19 @@
+{% extends "layout/default.html" %}
+
+{% block title %}Update tags{% endblock %}
+{% block heading %}Update tags{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <fieldset class="asset">
+    {% include "includes/asset-image-description.html" %}
+        <p class="metadata">
+            <label for="input-tags">Tags:</label>
+            <input id="input-tags" placeholder="e.g.: button, ubuntu" value="{{ asset.tags }}" type="text" name="tags" />
+        </p>
+    </fieldset>
+
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

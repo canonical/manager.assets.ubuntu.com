@@ -1,0 +1,16 @@
+{% extends "layout/default.html" %}
+
+{% block title %}Search assets{% endblock %}
+{% block heading %}Search assets{% endblock %} {# Nagios relies on the string "Search assets" #}
+
+{% block content %}
+    <form class="search-form">
+        <input type="search" name="q" placeholder="e.g.: header.jpg" value="{{ query }}" />
+    </form>
+
+    {% if assets %}
+        {% include "includes/list.html" %}
+    {% elif query %}
+        <p>No assets found</p>
+    {% endif %}
+{% endblock %}

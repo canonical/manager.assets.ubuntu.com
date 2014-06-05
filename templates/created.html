@@ -1,0 +1,8 @@
+{% extends "layout/default.html" %}
+
+{% block title %}{{assets|length}} assets created{% endblock %}
+{% block heading %}{{assets|length}} assets created{% endblock %}
+
+{% block content %}
+{% include "includes/list.html" %}
+{% endblock %}

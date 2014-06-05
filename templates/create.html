@@ -1,0 +1,22 @@
+{% extends "layout/default.html" %}
+
+{% block title %}Create assets{% endblock %}
+{% block heading %}Create assets{% endblock %}
+
+{% block content %}
+{% if asset %}
+    <div class="asset">
+    {% include "includes/asset.html" %}
+    </div>
+{% endif %}
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input id="input-files" type="file" multiple name="assets" />
+
+    <label for="input-tags">Tags:</label>
+    <input id="input-tags" placeholder="e.g.: button, ubuntu" value="{{ tags }}" type="text" name="tags" />
+
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

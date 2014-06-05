@@ -1,0 +1,4 @@
+{% if asset.image %}
+<img src="{{ asset.url }}?h=50&w=50" height="50" width="50" />
+{% endif %}
+<p class="filename"><a href="{{ asset.url }}">{{ asset.filename }}</a></p>

@@ -1,0 +1,33 @@
+<!doctype html>
+
+<html>
+    <head>
+        <title>{% block title %}NO TITLE{% endblock %} | Assets manager</title>
+        <link rel="stylesheet" href="/static/global.css" />
+    </head>
+
+    <body>
+        <nav>
+            <ul>
+                {% url 'index' as index_url %}
+                {% url 'create' as create_url %}
+                <li class="{% ifequal request.path index_url %}current{% endifequal %}">
+                    <a href="{{ index_url }}">search</a>
+                </li>
+                <li class="{% ifequal request.path create_url %}current{% endifequal %}">
+                    <a href="{{ create_url }}">create</a>
+                </li>
+            </ul>
+        </nav>
+
+        <h1>{% block heading %}NO HEADING{% endblock %}</h1>
+
+{% if error %}<p class="message error">{{ error }}</p>{% endif %}
+{% if message %}<p class="message">{{ message }}</p>{% endif %}
+
+        {% block content %}
+        YOU SHOULDN'T BE SEEING THIS
+        default.html SHOULD ONLY BE EXTENDED, NEVER CALLED DIRECTLY
+        {% endblock %}
+    </body>
+</html>
