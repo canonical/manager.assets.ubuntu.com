@@ -1,5 +1,5 @@
 """
-Django settings for assets_admin project.
+Django settings for assets_manager project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -47,9 +47,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'assets_admin.urls'
+ROOT_URLCONF = 'assets_manager.urls'
 
-WSGI_APPLICATION = 'assets_admin.wsgi.application'
+WSGI_APPLICATION = 'assets_manager.wsgi.application'
 
 
 # Database

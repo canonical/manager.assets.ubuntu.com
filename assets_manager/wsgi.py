@@ -1,5 +1,5 @@
 """
-WSGI config for assets_admin project.
+WSGI config for assets_manager project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -13,7 +13,7 @@ import sys
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 sys.path.append(BASE_DIR)
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "assets_admin.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "assets_manager.settings")
 
 
 
