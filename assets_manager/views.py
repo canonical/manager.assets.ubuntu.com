@@ -5,16 +5,17 @@ import os
 from django.shortcuts import render
 from django.http import HttpResponse
 from requests.exceptions import RequestException
+from urlparse import urljoin
 
 # Local
 from lib.http_helpers import files_from_request_form
 from lib.mappers import AssetMapper
 
-assets_server_hostname = os.environ.get(
-    'HTTP_SERVER_HOSTNAME',
-    'localhost:8001'
+server_url = os.environ.get(
+    'WEBSERVICE_URL',
+    'http://localhost:8001'
 )
-mapper = AssetMapper(server_url="http://{0}/v1/".format(assets_server_hostname))
+mapper = AssetMapper(server_url=urljoin(server_url, 'v1/'))
 
 
 def api_error(error):

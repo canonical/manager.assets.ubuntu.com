@@ -12,7 +12,7 @@ class AssetMapper:
     server_url = ""
     image_types = ["image/png", "image/jpeg", "image/svg+xml", "image/gif"]
 
-    def __init__(self, server_url="http://localhost:5000/v1"):
+    def __init__(self, server_url):
         self.server_url = server_url
 
     def get(self, filename):
