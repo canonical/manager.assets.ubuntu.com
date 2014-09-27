@@ -10,7 +10,7 @@
     {% endif %}
 
     {% if existing %}
-        <h2>Existing assets</h2>
+        <h2>{{existing|length}} existing assets</h2>
         {% include "includes/list.html" with assets=existing %}
     {% endif %}
 {% endblock %}
