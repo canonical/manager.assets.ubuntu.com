@@ -33,7 +33,7 @@ TEMPLATE_CONTEXT_PROCESSORS = ['django.core.context_processors.request']
 # ===
 import os
 
-AUTH_TOKEN = '5a50b96fdb604af481d951c2c9428206'
+AUTH_TOKEN = '<TOKEN_PLACEHOLDER>'
 SERVER_URL = os.environ.get(
     'WEBSERVICE_URL',
     'http://localhost:8001'
