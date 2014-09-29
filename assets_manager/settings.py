@@ -34,7 +34,5 @@ TEMPLATE_CONTEXT_PROCESSORS = ['django.core.context_processors.request']
 import os
 
 AUTH_TOKEN = '<TOKEN_PLACEHOLDER>'
-SERVER_URL = os.environ.get(
-    'WEBSERVICE_URL',
-    'http://localhost:8001'
-)
+DEFAULT_SERVER_URL = 'http://localhost:8012'
+SERVER_URL = os.environ.get('WEBSERVICE_URL', DEFAULT_SERVER_URL)
