@@ -50,3 +50,9 @@ $ make setup  # Sets up a new environment in the `env` folder
 ``` bash
 $ make develop  # Starts the dev server on port 8011
 ````
+
+Or you can run on a different port as follows:
+
+``` bash
+$ PORT=8765 make develop
+```
