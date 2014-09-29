@@ -1,7 +1,7 @@
 SHELL := /bin/bash # Use bash syntax
 
 define HELP_TEXT
-Ubuntu.com website project
+Assets manager project
 ===
 
 Usage:
