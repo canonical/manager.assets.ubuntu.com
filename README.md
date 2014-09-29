@@ -24,6 +24,26 @@ Or by setting the `WEBSERVICE_URL` environment variable:
 $ WEBSERVICE_URL='https://assets.example.com' make develop
 ```
 
+Credentials for the assets-server
+---
+
+You also need to create an authorization token for the assets-manager:
+
+``` bash
+# This sets a random token in assets_manager/settings.py
+# And prints it out
+$ make auth-token
+Authorization token (in assets_manager/settings.py):
+0338588d93c845e387cd4ec8b1aee55c 
+```
+
+and add this token to the assets-server using its `create-token.sh` script:
+
+``` bash
+cd assets-server-directory
+scripts/create-token.sh 0338588d93c845e387cd4ec8b1aee55c manager
+```
+
 Local development
 ---
 
