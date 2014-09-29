@@ -28,3 +28,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = ["static"]
 TEMPLATE_DIRS = ["templates"]
 TEMPLATE_CONTEXT_PROCESSORS = ['django.core.context_processors.request']
+
+# Assets server connection
+# ===
+import os
+
+AUTH_TOKEN = '<TOKEN_PLACEHOLDER>'
+DEFAULT_SERVER_URL = 'http://localhost:8012'
+SERVER_URL = os.environ.get('WEBSERVICE_URL', DEFAULT_SERVER_URL)

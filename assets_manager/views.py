@@ -1,9 +1,7 @@
-# System
-import os
-
-# Installed
+# Packages
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.conf import settings
 from requests.exceptions import RequestException
 from urlparse import urljoin
 
@@ -11,11 +9,11 @@ from urlparse import urljoin
 from lib.http_helpers import files_from_request_form
 from lib.mappers import AssetMapper
 
-server_url = os.environ.get(
-    'WEBSERVICE_URL',
-    'http://localhost:8001'
+
+mapper = AssetMapper(
+    server_url=urljoin(settings.SERVER_URL, 'v1/'),
+    auth_token=settings.AUTH_TOKEN
 )
-mapper = AssetMapper(server_url=urljoin(server_url, 'v1/'))
 
 
 def api_error(error):
