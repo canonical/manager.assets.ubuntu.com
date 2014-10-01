@@ -45,3 +45,7 @@ auth-token:
 	@sed -i "s/<TOKEN_PLACEHOLDER>/${TOKEN}/" assets_manager/settings.py; \
 	echo "Authorization token (in assets_manager/settings.py):"
 	@grep -o -P "(?<=AUTH_TOKEN\\s=\\s')[^']+(?=')" assets_manager/settings.py
+
+
+pip-cache:
+	(cd pip-cache && bzr pull && bzr up) || bzr branch lp:~webteam-backend/assets-manager/dependencies pip-cache
