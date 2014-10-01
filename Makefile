@@ -1,7 +1,7 @@
 SHELL := /bin/bash # Use bash syntax
 
 define HELP_TEXT
-Ubuntu.com website project
+Assets manager project
 ===
 
 Usage:
@@ -15,8 +15,13 @@ endef
 
 ENVPATH=${VIRTUAL_ENV}
 VEX=vex --path ${ENVPATH}
+
 ifeq ($(ENVPATH),)
 	ENVPATH=env
+endif
+
+ifeq ($(PORT),)
+	PORT=8011
 endif
 
 ##
@@ -30,7 +35,7 @@ setup:
 	${VEX} pip install -r requirements/dev.txt
 
 develop:
-	${VEX} python manage.py runserver_plus 8011
+	${VEX} python manage.py runserver_plus 0.0.0.0:${PORT}
 
 rebuild-dependencies-cache:
 	rm -rf pip-cache
