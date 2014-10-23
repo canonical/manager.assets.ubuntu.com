@@ -6,10 +6,7 @@ Assets manager settings
 # Although it probably doesn't matter for this app...
 SECRET_KEY = '3z7qsr3n^@dhyb3qh_x_1c#6of_^d=uovy+a7)9sst))ns(697'
 
-ALLOWED_HOSTS = [
-    '0.0.0.0', '127.0.0.1', 'localhost',
-    '*.ubuntu.qa', '*.ubuntu.com', 'ubuntu.com'
-]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = []
