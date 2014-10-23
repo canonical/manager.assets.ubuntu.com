@@ -44,7 +44,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'handlers': {
         'error_file': {
-            'level': 'ERROR',
+            'level': 'WARNING',
             'filename': os.path.join(BASE_DIR, 'django-error.log'),
             'class':'logging.handlers.RotatingFileHandler',
             'maxBytes': 1 * 1024 * 1024,
@@ -54,7 +54,7 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['error_file'],
-            'level': 'ERROR',
+            'level': 'WARNING',
             'propagate': True
         }
     }
