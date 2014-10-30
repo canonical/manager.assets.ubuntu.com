@@ -45,4 +45,3 @@ rebuild-dependencies-cache:
 
 pip-cache:
 	(cd pip-cache && bzr pull && bzr up) || bzr branch lp:~webteam-backend/assets-manager/dependencies pip-cache
-
