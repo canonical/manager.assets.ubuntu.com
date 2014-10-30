@@ -1,4 +1,5 @@
 # Packages
+from django.core.exceptions import ImproperlyConfigured
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.conf import settings
@@ -9,6 +10,12 @@ from urlparse import urljoin
 from lib.http_helpers import files_from_request_form
 from lib.mappers import AssetMapper
 
+
+if not settings.AUTH_TOKEN:
+    raise ImproperlyConfigured(
+        'AUTH_TOKEN environment variable must be set '
+        'to access the assets server'
+    )
 
 mapper = AssetMapper(
     server_url=urljoin(settings.SERVER_URL, 'v1/'),

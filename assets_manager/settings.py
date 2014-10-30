@@ -35,7 +35,7 @@ DEFAULT_SERVER_URL = 'http://localhost:8012'
 SERVER_URL = os.environ.get('WEBSERVICE_URL', DEFAULT_SERVER_URL)
 
 # You must pass the AUTH_TOKEN as an environment variable
-AUTH_TOKEN = os.environ['AUTH_TOKEN']
+AUTH_TOKEN = os.environ.get('AUTH_TOKEN')
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
