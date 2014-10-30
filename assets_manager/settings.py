@@ -22,7 +22,8 @@ USE_L10N = False
 USE_TZ = False
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = ["static"]
+STATIC_ROOT = 'static'
+STATICFILES_FINDERS = ['django_static_root_finder.finders.StaticRootFinder']
 TEMPLATE_DIRS = ["templates"]
 TEMPLATE_CONTEXT_PROCESSORS = ['django.core.context_processors.request']
 
