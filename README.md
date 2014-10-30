@@ -27,22 +27,14 @@ $ WEBSERVICE_URL='https://assets.example.com' make develop
 Credentials for the assets-server
 ---
 
-You also need to create an authorization token for the assets-manager:
+You also need to create an authorization token for the assets-server:
 
 ``` bash
-# This sets a random token in assets_manager/settings.py
-# And prints it out
-$ make auth-token
-Authorization token (in assets_manager/settings.py):
-0338588d93c845e387cd4ec8b1aee55c 
+$ scripts/create-random-token.sh manager
+0338588d93c845e387cd4ec8b1aee55c
 ```
 
-and add this token to the assets-server using its `create-token.sh` script:
-
-``` bash
-cd assets-server-directory
-scripts/create-token.sh 0338588d93c845e387cd4ec8b1aee55c manager
-```
+You can then use this as the `AUTH_TOKEN` when starting the server.
 
 Local development
 ---
@@ -68,12 +60,11 @@ $ make setup  # Sets up a new environment in the `env` folder
 ### Run the development server
 
 ``` bash
-$ make develop  # Starts the dev server on port 8011
+$ AUTH_TOKEN=0338588d93c845e387cd4ec8b1aee55c make develop  # Starts the dev server on port 8011
 ````
 
 Or you can run on a different port as follows:
 
 ``` bash
-$ PORT=8765 make develop
+$ PORT=8765 AUTH_TOKEN=0338588d93c845e387cd4ec8b1aee55c make develop
 ```
-
