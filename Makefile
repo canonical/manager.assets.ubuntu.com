@@ -22,6 +22,8 @@ ifeq ($(PORT),)
 	PORT=8011
 endif
 
+.PHONY: pip-cache
+
 ##
 # Prepare the project
 ##
