@@ -1,10 +1,13 @@
 """
 Assets manager settings
 """
+import os
 
 # Keep it secret, keep it safe!
 # Although it probably doesn't matter for this app...
 SECRET_KEY = '3z7qsr3n^@dhyb3qh_x_1c#6of_^d=uovy+a7)9sst))ns(697'
+
+DEBUG = os.environ.get('WSGI_DEBUG', "").lower() == 'true'
 
 ALLOWED_HOSTS = ['*']
 
@@ -29,8 +32,6 @@ TEMPLATE_CONTEXT_PROCESSORS = ['django.core.context_processors.request']
 
 # Assets server connection
 # ===
-import os
-
 DEFAULT_SERVER_URL = 'http://localhost:8012'
 SERVER_URL = os.environ.get('WEBSERVICE_URL', DEFAULT_SERVER_URL)
 
