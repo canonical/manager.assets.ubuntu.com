@@ -8,7 +8,7 @@ from urlparse import urljoin
 
 # Local
 from lib.http_helpers import files_from_request_form
-from lib.mappers import AssetMapper
+from ubuntudesign import AssetMapper
 
 
 if not settings.AUTH_TOKEN:
