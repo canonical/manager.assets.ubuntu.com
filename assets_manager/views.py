@@ -8,7 +8,7 @@ from urlparse import urljoin
 
 # Local
 from lib.http_helpers import files_from_request_form
-from lib.mappers import AssetMapper
+from ubuntudesign import AssetMapper
 
 
 if not settings.AUTH_TOKEN:
@@ -80,8 +80,8 @@ def create(request):
                     )
 
                     if 'code' in response and response['code'] != 200:
-                        if response['code'] == 409 and 'filename' in response:
-                            asset = mapper.get(response['filename'])
+                        if response['code'] == 409 and 'file_path' in response:
+                            asset = mapper.get(response['file_path'])
                             existing_assets.append(asset)
                         else:
                             # Error - pass on message
@@ -111,7 +111,7 @@ def create(request):
 
 
 def update(request):
-    asset = mapper.get(request.GET.get('filename'))
+    asset = mapper.get(request.GET.get('file-path'))
     template = "update.html"
     message = ""
     tags = asset['tags']
@@ -121,7 +121,7 @@ def update(request):
         # Get new tags
         tags = request.POST.get('tags')
 
-        asset = mapper.update(asset['filename'], tags)
+        asset = mapper.update(asset['file_path'], tags)
 
         template = "updated.html"
 
