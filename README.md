@@ -1,71 +1,26 @@
 Assets manager
 ===
 
-An admin web frontend for managing the [assets-server](/canonicalltd/assets-server).
+An admin web frontend for managing the [assets-server](/ubuntudesign/assets-server).
 
-Setting the server location
+
+Server setup
 ---
 
-You'll need to have an instance of the [assets-server](/canonicalltd/assets-server) running for this manager to pair with. By default, the manager will look for the server at <http://localhost:8012>. You can change this in two ways.
+You'll need to have the [assets-server](/ubuntudesign/assets-server) running for this manager to pair with.
 
-By changing the default in `settings.py`:
+By default, the manager will look for the server at <http://localhost:8012>. You can change this by setting the `WEBSERVICE_URL` environment variable.
 
-``` python
-# assets_server/settings.py
-
-DEFAULT_SERVER_URL = 'https://assets.example.com'
-```
-
-Or by setting the `WEBSERVICE_URL` environment variable:
-
-``` bash
-# Start the development server with an environment variable
-
-$ WEBSERVICE_URL='https://assets.example.com' make develop
-```
-
-Credentials for the assets-server
----
-
-You also need to create an authorization token for the assets-server:
-
-``` bash
-$ scripts/create-random-token.sh manager
-0338588d93c845e387cd4ec8b1aee55c
-```
-
-You can then use this as the `AUTH_TOKEN` when starting the server.
+The manager will also need a token to authenticate with the server's API. This can be set using the `AUTH_TOKEN` environment variable. 
 
 Local development
 ---
 
-Once you've setup the server credentials, here how to get the manager working locally:
-
-### System packages
+How to run the manager locally:
 
 ``` bash
-sudo apt-get install python-dev python-pip
-sudo pip install vex
+make setup                                          # Install dependencies
+export AUTH_TOKEN=0338588d93c845e387cd4ec8b1aee55c  # Register an auth token for the server
+export WEBSERVICE_URL=https://my-assets-server.com  # Where to find the assets-server (default: http://localhost:8012)
+make develop                                        # Start the development server on port 8011
 ```
-
-### Python environment
-
-You need to setup your python environment, which you can either do manually
-if you know how (from `requirements/dev.txt`) or use the make target:
-
-``` bash
-$ make setup  # Sets up a new environment in the `env` folder
-```
-
-### Run the development server
-
-``` bash
-$ AUTH_TOKEN=0338588d93c845e387cd4ec8b1aee55c make develop  # Starts the dev server on port 8011
-````
-
-Or you can run on a different port as follows:
-
-``` bash
-$ PORT=8765 AUTH_TOKEN=0338588d93c845e387cd4ec8b1aee55c make develop
-```
-
