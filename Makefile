@@ -12,17 +12,16 @@ Usage:
 endef
 
 ENVPATH=${VIRTUAL_ENV}
-VEX=vex --path ${ENVPATH}
 
 ifeq ($(ENVPATH),)
 	ENVPATH=env
 endif
 
+VEX=vex --path ${ENVPATH}
+
 ifeq ($(PORT),)
 	PORT=8011
 endif
-
-.PHONY: pip-cache
 
 ##
 # Print help
@@ -34,23 +33,25 @@ help:
 # Prepare the project
 ##
 setup:
+	# Install missing dependencies
+	if ! dpkg -s python-pip &> /dev/null; then \
+		sudo apt update && sudo apt install -y python-pip; \
+	fi
+
+	# Install vex globally (also installs virtualenv)
+	type vex &> /dev/null || sudo pip install vex
+
 	# Create virtual env folder, if not already in one
-	-[ -z ${VIRTUAL_ENV} ] && virtualenv ${ENVPATH}
+	if [ -z ${VIRTUAL_ENV} ]; then virtualenv ${ENVPATH}; fi
 
 	# Install requirements into virtual env
 	${VEX} pip install -r requirements/dev.txt
 
+##
+# Start the development server
+##
 develop:
 	${VEX} python manage.py runserver_plus 0.0.0.0:${PORT}
 
-rebuild-dependencies-cache:
-	rm -rf pip-cache
-	bzr branch lp:~webteam-backend/assets-manager/dependencies pip-cache
-	pip install --exists-action=w --download pip-cache/ -r requirements/standard.txt
-	bzr add pip-cache/.
-	bzr commit pip-cache/ --unchanged -m 'automatically updated partners requirements'
-	bzr push --directory pip-cache lp:~webteam-backend/assets-manager/dependencies
-	rm -rf pip-cache src
-
-pip-cache:
-	(cd pip-cache && bzr pull && bzr up) || bzr branch lp:~webteam-backend/assets-manager/dependencies pip-cache
+# Non-file make targets (https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html)
+.PHONY: help setup develop
