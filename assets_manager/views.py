@@ -1,9 +1,8 @@
 # Packages
 from django.core.exceptions import ImproperlyConfigured
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse
 from django.conf import settings
-from django.template import RequestContext, loader
 from requests.exceptions import RequestException
 from urlparse import urljoin
 
@@ -133,9 +132,4 @@ def update(request):
             'asset': asset,
             'message': message
         }
-    )
-
-def error_404(request):
-    return HttpResponseNotFound(
-        render(request, '404.html')
     )
