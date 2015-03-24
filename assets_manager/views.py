@@ -3,13 +3,12 @@ from django.core.exceptions import ImproperlyConfigured
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
 from django.conf import settings
-from django.template import RequestContext, loader
 from requests.exceptions import RequestException
 from urlparse import urljoin
+from ubuntudesign import AssetMapper
 
 # Local
 from lib.http_helpers import files_from_request_form
-from ubuntudesign import AssetMapper
 
 
 if not settings.AUTH_TOKEN:
@@ -62,12 +61,14 @@ def create(request):
     created_assets = []
     existing_assets = []
     tags = ''
+    optimize = True
 
     # Process form post
     if request.method == "POST":
         # Get files from form data
         files = files_from_request_form(request, "assets")
         tags = request.POST.get('tags')
+        optimize = request.POST.get('optimize')
 
         if files:
 
@@ -77,7 +78,7 @@ def create(request):
 
                 try:
                     response = mapper.create(
-                        asset_file.read(), asset_file.name, tags
+                        asset_file.read(), asset_file.name, tags, optimize
                     )
 
                     if 'code' in response and response['code'] != 200:
@@ -106,7 +107,8 @@ def create(request):
             'error': error,
             'assets': created_assets,
             'existing': existing_assets,
-            'tags': tags
+            'tags': tags,
+            'optimize': optimize
         }
     )
 
@@ -134,6 +136,7 @@ def update(request):
             'message': message
         }
     )
+
 
 def error_404(request):
     return HttpResponseNotFound(
