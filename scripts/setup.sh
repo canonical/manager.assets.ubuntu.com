@@ -3,8 +3,11 @@
 set -e
 
 # Where is the environment?
+THIS_FILE=$(readlink -f $0)
+THIS_DIR=$(dirname ${THIS_FILE})
+PROJECT_DIR=$(dirname ${THIS_DIR})
 ENVPATH=${VIRTUAL_ENV}
-if [ -z ${ENVPATH} ]; then ENVPATH=env; fi
+if [ -z ${ENVPATH} ]; then ENVPATH=${PROJECT_DIR}/env; fi
 
 # Install missing dependencies
 if ! dpkg -s python-pip &> /dev/null; then \
@@ -31,5 +34,7 @@ read -p "Auth token for the server? " auth_token
 if [ -z ${auth_token} ]; then echo "Auth token required. Exiting"; exit 1; fi
 
 # Store settings to settings file
-echo "export WEBSERVICE_URL=${server_url}" > .server-settings.conf
-echo "export AUTH_TOKEN=${auth_token}" >> .server-settings.conf
+echo "export WEBSERVICE_URL=${server_url}" > ${PROJECT_DIR}/.server-settings.conf
+echo "export AUTH_TOKEN=${auth_token}" >> ${PROJECT_DIR}/.server-settings.conf
+
+echo -e "\nSettings saved to ${PROJECT_DIR}/.server-settings.conf"

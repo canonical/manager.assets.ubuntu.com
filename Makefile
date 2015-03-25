@@ -31,14 +31,13 @@ help:
 # Prepare the project
 ##
 setup:
-	./.setup.sh
+	scripts/setup.sh
 
 ##
 # Start the development server
 ##
 develop:
-	source .server-settings.conf && \
-	vex --path ${ENVPATH} python manage.py runserver_plus 0.0.0.0:${PORT}
+	scripts/runserver.sh ${PORT}
 
 
 setenv:
