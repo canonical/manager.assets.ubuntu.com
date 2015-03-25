@@ -18,6 +18,9 @@
     <label for="input-tags">Tags:</label>
     <input id="input-tags" placeholder="e.g.: button, ubuntu" value="{{ tags }}" type="text" name="tags" />
 
+    <label for="input-optimize">Optimize images:</label>
+    <input id="input-optimize" {{ optimize|yesno:"checked,," }} type="checkbox" name="optimize" />
+
     <button type="submit">Submit</button>
 </form>
 {% endblock %}
