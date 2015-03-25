@@ -2,3 +2,5 @@
 *.pyc
 ./pip-cache
 django-error.log
+.server-settings.conf
+/env/
