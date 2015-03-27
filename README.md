@@ -7,7 +7,7 @@ An admin web frontend for managing the [assets-server](/ubuntudesign/assets-serv
 Server setup
 ---
 
-You'll need to have the [assets-server](/ubuntudesign/assets-server) running for this manager to pair with.
+You'll need to have the [assets-server](https://github.com/ubuntudesign/assets-server) running for this manager to pair with.
 
 By default, the manager will look for the server at <http://localhost:8012>. You can change this by setting the `WEBSERVICE_URL` environment variable.
 
