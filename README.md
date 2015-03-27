@@ -1,7 +1,7 @@
 Assets manager
 ===
 
-An admin web frontend for managing the [assets-server](/ubuntudesign/assets-server).
+An admin web frontend for managing the [assets-server](https://github.com/ubuntudesign/assets-server).
 
 
 Server setup
