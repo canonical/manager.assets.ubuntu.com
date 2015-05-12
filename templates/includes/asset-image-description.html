@@ -1,6 +1,6 @@
 {% if asset.image %}
 <a href="{{ asset.url }}">
-    <img src="{{ asset.url }}?h=85&amp;w=85" height="50" width="50" />
+    <img src="{{ asset.url }}?max-height=85&amp;max-width=85" height="50" width="50" />
 </a>
 {% endif %}
 <p class="filename"><a href="{{ asset.url }}">{{ asset.file_path }}</a></p>
