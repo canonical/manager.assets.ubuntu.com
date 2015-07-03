@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django_openid_auth',
+    'assets_manager'
 ]
 
 MIDDLEWARE_CLASSES = (
