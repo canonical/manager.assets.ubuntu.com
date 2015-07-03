@@ -22,21 +22,24 @@ if [ -z ${VIRTUAL_ENV} ]; then virtualenv ${ENVPATH}; fi
 
 # Install requirements into virtual env
 vex --path ${ENVPATH} pip install -r requirements/dev.txt
+if [[ ! -e ${PROJECT_DIR}/.server-settings.conf ]]; then
 
-echo -e "\nServer settings\n===\n"
+  echo -e "\nServer settings\n===\n"
 
-# Get server location
-read -p "Where is the assets server (http://localhost:8012/)? " server_url
-if [ -z ${server_url} ]; then server_url=http://localhost:8012/; fi
+  # Get server location
+  read -p "Where is the assets server (http://localhost:8012/)? " server_url
+  if [ -z ${server_url} ]; then server_url=http://localhost:8012/; fi
 
-# Get auth token
-read -p "Auth token for the server? " auth_token
-if [ -z ${auth_token} ]; then echo "Auth token required. Exiting"; exit 1; fi
+  # Get auth token
+  read -p "Auth token for the server? " auth_token
+  if [ -z ${auth_token} ]; then echo "Auth token required. Exiting"; exit 1; fi
 
-# Store settings to settings file
-echo "export WEBSERVICE_URL=${server_url}" > ${PROJECT_DIR}/.server-settings.conf
-echo "export AUTH_TOKEN=${auth_token}" >> ${PROJECT_DIR}/.server-settings.conf
+  # Store settings to settings file
+  echo "export WEBSERVICE_URL=${server_url}" > ${PROJECT_DIR}/.server-settings.conf
+  echo "export AUTH_TOKEN=${auth_token}" >> ${PROJECT_DIR}/.server-settings.conf
 
-echo -e "\nSettings saved to ${PROJECT_DIR}/.server-settings.conf"
+  echo -e "\nSettings saved to ${PROJECT_DIR}/.server-settings.conf"
+
+fi
 
 vex --path ${ENVPATH} python manage.py syncdb --noinput
