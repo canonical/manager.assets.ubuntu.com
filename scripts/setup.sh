@@ -39,4 +39,4 @@ echo "export AUTH_TOKEN=${auth_token}" >> ${PROJECT_DIR}/.server-settings.conf
 
 echo -e "\nSettings saved to ${PROJECT_DIR}/.server-settings.conf"
 
-./manage.py syncdb --noinput
+vex --path ${ENVPATH} python manage.py syncdb --noinput
