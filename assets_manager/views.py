@@ -6,16 +6,18 @@ from django.conf import settings
 from requests.exceptions import RequestException
 from urlparse import urljoin
 from ubuntudesign import AssetMapper
+from django.contrib.auth.decorators import login_required
 
 # Local
 from lib.http_helpers import files_from_request_form
 
-
+"""
 if not settings.AUTH_TOKEN:
     raise ImproperlyConfigured(
         'AUTH_TOKEN environment variable must be set '
         'to access the assets server'
     )
+"""
 
 mapper = AssetMapper(
     server_url=urljoin(settings.SERVER_URL, 'v1/'),
@@ -37,6 +39,7 @@ def api_error(error):
     )
 
 
+@login_required
 def index(request):
     query = request.GET.get('q', '')
 
@@ -55,6 +58,7 @@ def index(request):
     )
 
 
+@login_required
 def create(request):
     template = "create.html"
     error = ""
@@ -113,6 +117,7 @@ def create(request):
     )
 
 
+@login_required
 def update(request):
     asset = mapper.get(request.GET.get('file-path'))
     template = "update.html"
@@ -138,6 +143,7 @@ def update(request):
     )
 
 
+@login_required
 def error_404(request):
     return HttpResponseNotFound(
         render(request, '404.html')
