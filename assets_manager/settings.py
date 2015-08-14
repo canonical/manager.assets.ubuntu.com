@@ -11,6 +11,7 @@ SECRET_KEY = '3z7qsr3n^@dhyb3qh_x_1c#6of_^d=uovy+a7)9sst))ns(697'
 DEBUG = os.environ.get('WSGI_DEBUG', "").lower() == 'true'
 
 ALLOWED_HOSTS = ['*']
+USE_X_FORWARDED_HOST = True
 
 # Application definition
 INSTALLED_APPS = [
