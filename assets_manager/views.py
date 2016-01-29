@@ -1,5 +1,4 @@
 # Packages
-from django.core.exceptions import ImproperlyConfigured
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
 from django.conf import settings
@@ -91,8 +90,8 @@ def create(request):
                             existing_assets.append(asset)
                         else:
                             # Error - pass on message
-                            error = 'Error: {message}'.format(
-                                message=response['message']
+                            error = 'Response error from server: {code}'.format(
+                                code=response['code']
                             )
                     else:
                         # Success
