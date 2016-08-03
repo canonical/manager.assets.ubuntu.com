@@ -44,7 +44,7 @@ def index(request):
     type  = request.GET.get('type', '')
 
     try:
-        assets = mapper.all(query) if query else []
+        assets = mapper.all(query, type) if query else []
     except RequestException as error:
         return api_error(error)
 
