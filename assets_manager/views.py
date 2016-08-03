@@ -41,6 +41,7 @@ def api_error(error):
 @login_required
 def index(request):
     query = request.GET.get('q', '')
+    type  = request.GET.get('type', '')
 
     try:
         assets = mapper.all(query) if query else []
@@ -52,7 +53,8 @@ def index(request):
         'index.html',
         {
             'assets': assets,
-            'query': query
+            'query': query,
+            'type': type
         }
     )
 

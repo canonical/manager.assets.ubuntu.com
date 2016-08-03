@@ -12,15 +12,24 @@
 {% endif %}
 
 <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input id="input-files" type="file" multiple name="assets" />
-
-    <label for="input-tags">Tags:</label>
-    <input id="input-tags" placeholder="e.g.: button, ubuntu" value="{{ tags }}" type="text" name="tags" />
-
-    <label for="input-optimize">Optimize images:</label>
-    <input id="input-optimize" {{ optimize|yesno:"checked,," }} type="checkbox" name="optimize" />
-
-    <button type="submit">Submit</button>
+  <fieldset>
+    <ul class="no-bulltes">
+      {% csrf_token %}
+      <li>
+        <input id="input-files" type="file" multiple name="assets" />
+      </li>
+      <li>
+        <label for="input-tags">Tags:</label>
+        <input id="input-tags" placeholder="e.g.: button, ubuntu" value="{{ tags }}" type="text" name="tags" />
+      </li>
+      <li>
+        <input id="input-optimize" {{ optimize|yesno:"checked,," }} type="checkbox" name="optimize" />
+        <label for="input-optimize">Optimize images:</label>
+      </li>
+      <li>
+        <button type="submit">Submit</button>
+      </li>
+    </ul>
+  </fieldset>
 </form>
 {% endblock %}
