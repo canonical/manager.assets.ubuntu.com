@@ -1,16 +1,1 @@
 {% include "includes/asset-image-description.html" %}
-
-<p class="metadata">
-    <label>Tags:</label>
-    {% if asset.tags %}
-        {{ asset.tags }}
-    {% else %}
-        <em>none</em>
-    {% endif %}
-    <a href="/update?file-path={{ asset.file_path }}">change</a>
-</p>
-
-<p class="metadata">
-    <label>Created:</label>
-    {{ asset.created }}
-</p>
