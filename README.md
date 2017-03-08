@@ -24,3 +24,7 @@ export AUTH_TOKEN=0338588d93c845e387cd4ec8b1aee55c  # Register an auth token for
 export WEBSERVICE_URL=https://my-assets-server.com  # Where to find the assets-server (default: http://localhost:8012)
 make develop                                        # Start the development server on port 8011
 ```
+
+---
+
+The champion for this project is [nottrobin](https://github.com/nottrobin).
