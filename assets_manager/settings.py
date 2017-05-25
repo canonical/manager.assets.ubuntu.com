@@ -4,11 +4,9 @@ Assets manager settings
 import os
 import sys
 
-# Keep it secret, keep it safe!
-# Although it probably doesn't matter for this app...
-SECRET_KEY = '3z7qsr3n^@dhyb3qh_x_1c#6of_^d=uovy+a7)9sst))ns(697'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'no_secret')
 
-DEBUG = os.environ.get('WSGI_DEBUG', "").lower() == 'true'
+DEBUG = os.environ.get('DJANGO_DEBUG', 'false').lower() == 'true'
 
 ALLOWED_HOSTS = ['*']
 
@@ -22,7 +20,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django_openid_auth',
-    'assets_manager'
 ]
 
 MIDDLEWARE_CLASSES = (
