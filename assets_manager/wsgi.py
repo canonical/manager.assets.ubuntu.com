@@ -1,10 +1,5 @@
 """
-WSGI config for assets_manager project.
-
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/
+WSGI config for webapp project.
 """
 
 import os
@@ -13,9 +8,9 @@ import sys
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 sys.path.append(BASE_DIR)
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "assets_manager.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "webapp.settings")
 
-from dj_static import Cling
-from django.core.wsgi import get_wsgi_application
+from django.core.wsgi import get_wsgi_application  # noqa: E402
+from whitenoise.django import DjangoWhiteNoise  # noqa: E402
 
-application = Cling(get_wsgi_application())
+application = DjangoWhiteNoise(get_wsgi_application())

@@ -3,20 +3,16 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
 from django.conf import settings
 from requests.exceptions import RequestException
-from urlparse import urljoin
-from ubuntudesign import AssetMapper
+try:
+    from urllib.parse import urljoin
+except ImportError:
+    from urlparse import urljoin
 from django.contrib.auth.decorators import login_required
 
 # Local
-from lib.http_helpers import files_from_request_form
+from .lib.http_helpers import files_from_request_form
+from .mappers import AssetMapper
 
-"""
-if not settings.AUTH_TOKEN:
-    raise ImproperlyConfigured(
-        'AUTH_TOKEN environment variable must be set '
-        'to access the assets server'
-    )
-"""
 
 mapper = AssetMapper(
     server_url=urljoin(settings.SERVER_URL, 'v1/'),
@@ -41,7 +37,7 @@ def api_error(error):
 @login_required
 def index(request):
     query = request.GET.get('q', '')
-    type  = request.GET.get('type', '')
+    asset_type = request.GET.get('type', '')
 
     try:
         assets = mapper.all(request.GET) if query else []
@@ -54,7 +50,7 @@ def index(request):
         {
             'assets': assets,
             'query': query,
-            'type': type
+            'type': asset_type
         }
     )
 
@@ -92,7 +88,7 @@ def create(request):
                             existing_assets.append(asset)
                         else:
                             # Error - pass on message
-                            error = 'Response error from server: {code}'.format(
+                            error = 'Error from server: {code}'.format(
                                 code=response['code']
                             )
                     else:
