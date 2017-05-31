@@ -1,28 +1,37 @@
-Assets manager
-===
+# Assets manager
 
-An admin web frontend for managing the [assets-server](https://github.com/ubuntudesign/assets-server).
+An admin web frontend for managing the [assets-server](https://github.com/canonical-websites/assets.ubuntu.com).
 
+## Local development
 
-Server setup
----
+First, you need to know the URL of instance of the [assets server](https://github.com/canonical-websites/assets.ubuntu.com) you wish to connect to, and an authorisation key for connecting to it.
 
-You'll need to have the [assets-server](https://github.com/ubuntudesign/assets-server) running for this manager to pair with.
+### Running the server
 
-By default, the manager will look for the server at <http://localhost:8012>. You can change this by setting the `WEBSERVICE_URL` environment variable.
+The simplest way to run the site locally is to first [install Docker](https://docs.docker.com/engine/installation/) (on Linux you may need to [add your user to the `docker` group](https://docs.docker.com/engine/installation/linux/linux-postinstall/)), and then use the `./run` script.
 
-The manager will also need a token to authenticate with the server's API. This can be set using the `AUTH_TOKEN` environment variable. 
-
-Local development
----
-
-How to run the manager locally:
+The first time you run it, the script will ask you to choose a URL for the server, and an authorisation key. E.g.:
 
 ``` bash
-make setup                                          # Install dependencies
-export AUTH_TOKEN=0338588d93c845e387cd4ec8b1aee55c  # Register an auth token for the server
-export WEBSERVICE_URL=https://my-assets-server.com  # Where to find the assets-server (default: http://localhost:8012)
-make develop                                        # Start the development server on port 8011
+$ ./run
+Enter the URL for the assets webservice (e.g. https://assets.staging.ubuntu.com, or http://localhost:8018):
+https://assets.staging.ubuntu.com
+Enter the authentication token for the assets webservice:
+xxxxxxxxxxx
+```
+
+These settings will be stored in the `.local-env` file, and read from there.
+
+Once the containers are setup, you can visit <http://127.0.0.1:8018> in your browser to see the web frontend for controlling the assets service.
+
+### Building CSS
+
+For working on [Sass files](_sass), you may want to dynamically watch for changes to rebuild the CSS whenever something changes.
+
+To setup the watcher, open a new terminal window and run:
+
+``` bash
+./run watch
 ```
 
 ---
