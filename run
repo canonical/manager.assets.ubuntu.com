@@ -217,12 +217,12 @@ if [[ -n "${run_command}" ]]; then shift; fi
 # Do the real business
 case $run_command in
     ""|"serve")
-        if [ -z "${WEBSERVICE_URL:-}" ]; then
+        if [ -n "${tty}" ] && [ -z "${WEBSERVICE_URL:-}" ]; then
             echo "Enter the URL for the assets webservice (e.g. https://assets.staging.ubuntu.com, or http://localhost:8018):"
             read WEBSERVICE_URL
             echo "WEBSERVICE_URL=${WEBSERVICE_URL}" >> .local-env
         fi
-        if [ -z "${AUTH_TOKEN:-}" ]; then
+        if [ -n "${tty}" ] && [ -z "${AUTH_TOKEN:-}" ]; then
             echo "Enter the authentication token for the assets webservice:"
             read AUTH_TOKEN
             echo "AUTH_TOKEN=${AUTH_TOKEN}" >> .local-env
