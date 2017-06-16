@@ -4,11 +4,9 @@ Assets manager settings
 import os
 import sys
 
-# Keep it secret, keep it safe!
-# Although it probably doesn't matter for this app...
-SECRET_KEY = '3z7qsr3n^@dhyb3qh_x_1c#6of_^d=uovy+a7)9sst))ns(697'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'no_secret')
 
-DEBUG = os.environ.get('WSGI_DEBUG', "").lower() == 'true'
+DEBUG = os.environ.get('DJANGO_DEBUG', 'false').lower() == 'true'
 
 ALLOWED_HOSTS = ['*']
 
@@ -18,11 +16,13 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
+    'django.contrib.staticfiles',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django_openid_auth',
-    'assets_manager'
+    'assets_manager',
 ]
 
 MIDDLEWARE_CLASSES = (
@@ -46,29 +46,39 @@ USE_TZ = False
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
 STATICFILES_FINDERS = ['django_static_root_finder.finders.StaticRootFinder']
-TEMPLATE_DIRS = ["templates"]
-TEMPLATE_CONTEXT_PROCESSORS = ['django.core.context_processors.request']
 
 # Assets server connection
 # ===
-DEFAULT_SERVER_URL = 'http://localhost:8012'
-SERVER_URL = os.environ.get('WEBSERVICE_URL', DEFAULT_SERVER_URL)
+SERVER_URL = os.environ['WEBSERVICE_URL']
 
 # You must pass the AUTH_TOKEN as an environment variable
-AUTH_TOKEN = os.environ.get('AUTH_TOKEN')
+AUTH_TOKEN = os.environ['AUTH_TOKEN']
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'assets_manager',
+        'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'dev',
-        'HOST': '127.0.0.1',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': {
+                'django.template.context_processors.request',
+            },
+        },
+    },
+]
 
 # Update database settings from DATABASE_URL environment variable
 import dj_database_url

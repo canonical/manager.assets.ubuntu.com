@@ -1,3 +1,0 @@
--r standard.txt
-django-extensions
-Werkzeug
