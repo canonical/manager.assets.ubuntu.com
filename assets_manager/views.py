@@ -75,7 +75,6 @@ def create(request):
 
             # Create all files
             for asset_file in files:
-                template = "created.html"
 
                 try:
                     response = mapper.create(
@@ -95,8 +94,11 @@ def create(request):
                         # Success
                         created_assets.append(response)
 
-                except RequestException as error:
-                    api_error(error)
+                except RequestException as request_error:
+                    error = api_error(request_error).content
+
+            if not error:
+                template = "created.html"
 
         else:
             error = "Please select files to upload"
