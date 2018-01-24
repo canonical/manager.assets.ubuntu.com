@@ -1,3 +1,12 @@
+from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from builtins import dict
+from builtins import object
+from future import standard_library
+standard_library.install_aliases() # noqa
+
 # System
 import mimetypes
 from base64 import b64encode
@@ -6,7 +15,7 @@ try:
         parse_qsl, urlencode, urljoin, urlparse, urlunparse
     )
 except ImportError:
-    from urlparse import (
+    from urllib.parse import (
         parse_qsl, urlencode, urljoin, urlparse, urlunparse
     )
 
@@ -28,7 +37,7 @@ def add_query_params(url, params):
     return urlunparse(url_parts)
 
 
-class AssetMapper:
+class AssetMapper(object):
     """
     Map data from the Assets API into model objects
     """

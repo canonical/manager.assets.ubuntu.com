@@ -2,6 +2,7 @@ Django==1.11.1
 requests==2.3.0
 django-static-root-finder==0.1.1
 dj-database-url==0.3.0
+future==0.16.0
 psycopg2==2.6.1
 python-openid==2.2.5
 django-openid-auth==0.14

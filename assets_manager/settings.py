@@ -1,8 +1,24 @@
 """
 Assets manager settings
 """
+from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from future import standard_library
+standard_library.install_aliases() # noqa
+
 import os
 import sys
+
+
+def to_unicode(string):
+    """Convert a string to a Unicode string for Python 2."""
+    try:
+        return unicode(string)
+    except NameError:
+        return string
+
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'no_secret')
 
@@ -49,10 +65,10 @@ STATICFILES_FINDERS = ['django_static_root_finder.finders.StaticRootFinder']
 
 # Assets server connection
 # ===
-SERVER_URL = os.environ['WEBSERVICE_URL']
+SERVER_URL = to_unicode(os.environ['WEBSERVICE_URL'])
 
 # You must pass the AUTH_TOKEN as an environment variable
-AUTH_TOKEN = os.environ['AUTH_TOKEN']
+AUTH_TOKEN = to_unicode(os.environ['AUTH_TOKEN'])
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 

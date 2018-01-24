@@ -1,3 +1,10 @@
+from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from future import standard_library
+standard_library.install_aliases() # noqa
+
 # Packages
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
@@ -6,7 +13,7 @@ from requests.exceptions import RequestException
 try:
     from urllib.parse import urljoin
 except ImportError:
-    from urlparse import urljoin
+    from urllib.parse import urljoin
 from django.contrib.auth.decorators import login_required
 
 # Local
