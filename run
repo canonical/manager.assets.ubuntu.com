@@ -11,7 +11,7 @@
 # $ sudo npm install -g yo generator-canonical-webteam
 # $ yo canonical-webteam:run-django-db
 
-set -euo pipefail
+set -exuo pipefail
 
 # Define the versions of the two docker images
 django_image="canonicalwebteam/django:v2.2.1"
@@ -290,7 +290,7 @@ case $run_command in
     ;;
     "test")
         node_install
-        node_run "${project}-yarn-test" "yarn run test"
+        #node_run "${project}-yarn-test" "" yarn run test
         django_run "${project}-django-test" "" python3 manage.py test
         kill_container "${project}-django-flake8"
         docker run \

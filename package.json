@@ -4,7 +4,9 @@
   "description": "Django website for ubuntu.com",
   "main": "index.js",
   "scripts": {
-    "test": "sass-lint static/**/*.scss --verbose --no-exit",
+    "test": "yarn run lint-scss && yarn run lint-python",
+    "lint-scss": "sass-lint static/**/*.scss --verbose --no-exit",
+    "lint-python": "flake8 assets_manager/ scripts/ && black --check --line-length 79 assets_manager/ scripts/",
     "build": "node-sass --include-path node_modules static/sass --output static/css",
     "watch": "node-sass --include-path node_modules --source-map true --watch static/sass --output static/css",
     "clean": "rm -rf node_modules yarn-error.log static/css *.log *.sqlite _site/ build/ .jekyll-metadata"

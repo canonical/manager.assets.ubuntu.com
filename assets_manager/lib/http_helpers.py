@@ -3,7 +3,8 @@ from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
-standard_library.install_aliases() # noqa
+
+standard_library.install_aliases()  # noqa
 
 
 def files_from_request_form(request, key):
@@ -20,7 +21,8 @@ def files_from_request_form(request, key):
         file_lists = request.FILES.lists()
 
         selected_list = [
-            file_list for file_list in file_lists
+            file_list
+            for file_list in file_lists
             if file_list[0] == key and len(file_list[1]) and file_list[1][0]
         ]
 
