@@ -1,0 +1,26 @@
+#! /usr/bin/env bash
+
+set -e
+
+RUN_COMMAND="talisker.gunicorn assets_manager.wsgi --bind $1 --worker-class sync --workers 8 --name talisker-`hostname` --access-logfile -"
+
+if [ "${FLASK_DEBUG}" = true ] || [ "${FLASK_DEBUG}" = 1 ]; then
+    RUN_COMMAND="${RUN_COMMAND} --reload --log-level debug --timeout 9999"
+fi
+
+# Get assets server settings
+if [ -t 1 ] && [ -z "${WEBSERVICE_URL:-}" ]; then
+    echo "Enter the URL for the assets webservice (e.g. https://assets.staging.ubuntu.com, or http://localhost:8018):"
+    read WEBSERVICE_URL
+    export WEBSERVICE_URL=${WEBSERVICE_URL}
+    echo "WEBSERVICE_URL=${WEBSERVICE_URL}" >> .env.local
+fi
+if [ -t 1 ] && [ -z "${AUTH_TOKEN:-}" ]; then
+    echo "Enter the authentication token for the assets webservice:"
+    read AUTH_TOKEN
+    export AUTH_TOKEN=${AUTH_TOKEN}
+    echo "AUTH_TOKEN=${AUTH_TOKEN}" >> .env.local
+fi
+
+${RUN_COMMAND}
+
