@@ -1,8 +1,4 @@
 {
-  "name": "ubuntu-website",
-  "version": "0.0.1",
-  "description": "Django website for ubuntu.com",
-  "main": "index.js",
   "scripts": {
     "test": "yarn run lint-scss && yarn run lint-python",
     "lint-scss": "sass-lint static/**/*.scss --exclude node_modules --verbose --no-exit",
@@ -12,12 +8,6 @@
     "serve": "./entrypoint 0.0.0.0:${PORT}",
     "clean": "rm -rf node_modules yarn-error.log static/css *.log *.sqlite _site/ build/ .jekyll-metadata"
   },
-  "keywords": [
-    "website",
-    "ubuntu"
-  ],
-  "author": "Canonical webteam",
-  "license": "LGPL v3",
   "devDependencies": {
     "node-sass": "4.5.3",
     "sass-lint": "1.10.2"
