@@ -1,22 +1,13 @@
 {
-  "name": "ubuntu-website",
-  "version": "0.0.1",
-  "description": "Django website for ubuntu.com",
-  "main": "index.js",
   "scripts": {
     "test": "yarn run lint-scss && yarn run lint-python",
-    "lint-scss": "sass-lint static/**/*.scss --verbose --no-exit",
+    "lint-scss": "sass-lint static/**/*.scss --exclude node_modules --verbose --no-exit",
     "lint-python": "flake8 assets_manager/ scripts/ && black --check --line-length 79 assets_manager/ scripts/",
     "build": "node-sass --include-path node_modules static/sass --output static/css",
     "watch": "node-sass --include-path node_modules --source-map true --watch static/sass --output static/css",
+    "serve": "./entrypoint 0.0.0.0:${PORT}",
     "clean": "rm -rf node_modules yarn-error.log static/css *.log *.sqlite _site/ build/ .jekyll-metadata"
   },
-  "keywords": [
-    "website",
-    "ubuntu"
-  ],
-  "author": "Canonical webteam",
-  "license": "LGPL v3",
   "devDependencies": {
     "node-sass": "4.5.3",
     "sass-lint": "1.10.2"
