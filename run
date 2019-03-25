@@ -11,7 +11,7 @@
 # $ sudo npm install -g yo generator-canonical-webteam
 # $ yo canonical-webteam:run-django-db
 
-set -exuo pipefail
+set -euo pipefail
 
 # Define the versions of the two docker images
 django_image="canonicalwebteam/django:v2.2.1"
