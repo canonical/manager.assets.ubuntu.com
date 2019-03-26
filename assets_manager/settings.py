@@ -1,17 +1,12 @@
 """
 Assets manager settings
 """
-from __future__ import unicode_literals
-from __future__ import print_function
-from __future__ import division
-from __future__ import absolute_import
-from future import standard_library
 
-standard_library.install_aliases()  # noqa
-
+# Standard library
 import os
 import sys
 
+# Packages
 import dj_database_url
 
 
@@ -45,6 +40,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE_CLASSES = (
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -64,7 +60,6 @@ USE_TZ = False
 
 STATIC_URL = "/static/"
 STATIC_ROOT = "static"
-STATICFILES_FINDERS = ["django_static_root_finder.finders.StaticRootFinder"]
 
 # Assets server connection
 # ===
