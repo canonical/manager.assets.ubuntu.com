@@ -47,11 +47,6 @@ if [ -n "${DOCKER_REGISTRY:-}" ]; then
     dev_image="${DOCKER_REGISTRY}/${dev_image}"
 fi
 
-# Interactivity options
-[ -t 1 ] && tty="--tty --interactive" || tty=""           # Do we have a terminal?
-[ -f .env ] && env_file="--env-file .env" || env_file=""  # Do we have an env file?
-[ -f .env.local ] && env_file="${env_file} --env-file .env.local" || env_file=$env_file  # Do we have a local env file?
-
 # Defaults environment settings
 PORT=8000
 
@@ -205,6 +200,11 @@ kill_container () {
 }
 
 docker_run () {
+    # Options
+    [ -t 1 ] && tty="--tty --interactive" || tty=""           # Do we have a terminal?
+    [ -f .env ] && env_file="--env-file .env" || env_file=""  # Do we have an env file?
+    [ -f .env.local ] && env_file="${env_file} --env-file .env.local" || env_file=$env_file  # Do we have a local env file?
+
     # Get options
     docker_run_options="${1}"; shift
 
