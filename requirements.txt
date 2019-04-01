@@ -1,4 +1,4 @@
-talisker==0.14.1
+talisker[gunicorn]==0.14.1
 Django==1.11.20
 requests==2.21.0
 django-static-root-finder==0.3.1
