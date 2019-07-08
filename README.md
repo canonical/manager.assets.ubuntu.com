@@ -1,4 +1,5 @@
 # Assets manager
+[![CircleCI build status](https://circleci.com/gh/canonical-web-and-design/manager.assets.ubuntu.com.svg?style=shield)](https://circleci.com/gh/canonical-web-and-design/manager.assets.ubuntu.com) [![Code coverage](https://codecov.io/gh/canonical-web-and-design/manager.assets.ubuntu.com/branch/master/graph/badge.svg)](https://codecov.io/gh/canonical-web-and-design/manager.assets.ubuntu.com)
 
 An admin web frontend for managing the [assets-server](https://github.com/canonical-websites/assets.ubuntu.com).
 
