@@ -1,0 +1,16 @@
+<div class="col-4 p-card">
+    <a href="/update?file-path={{ asset.file_path }}">
+        <p class="p-card__title">{{asset.file_path}}</p>
+    </a>
+    <div class="p-card__content">
+        <p><span>Tags: {{ asset.tags|default("None", true) }}</span></p>
+        <p><span>Created: {{ asset.created }}</span></p>
+        {% if asset.image %}
+        <div>
+            <a href="{{ asset.url }}" target="_blank">
+                <img class="p-image--bordered" src="{{ asset.url }}" style="max-width: 100px; max-height: 100px;">
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>

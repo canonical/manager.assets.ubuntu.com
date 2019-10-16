@@ -1,74 +1,30 @@
-from __future__ import unicode_literals
-from __future__ import print_function
-from __future__ import division
-from __future__ import absolute_import
-from builtins import dict
-from builtins import object
-from future import standard_library
-
-standard_library.install_aliases()  # noqa
-
-# System
 import mimetypes
 from base64 import b64encode
+from urllib.parse import urljoin
 
-try:
-    from urllib.parse import (
-        parse_qsl,
-        urlencode,
-        urljoin,
-        urlparse,
-        urlunparse,
-    )
-except ImportError:
-    from urllib.parse import (
-        parse_qsl,
-        urlencode,
-        urljoin,
-        urlparse,
-        urlunparse,
-    )
-
-# Modules
-import requests
+from requests import Session
 
 
-def add_query_params(url, params):
-    """
-    Add query params to a URL
-    """
-
-    url_parts = list(urlparse(url))
-    query = dict(parse_qsl(url_parts[4]))
-    query.update(params)
-
-    url_parts[4] = urlencode(query)
-
-    return urlunparse(url_parts)
-
-
-class AssetMapper(object):
+class AssetAPI(object):
     """
     Map data from the Assets API into model objects
     """
 
-    auth_token = ""
-    server_url = ""
     image_types = ["image/png", "image/jpeg", "image/svg+xml", "image/gif"]
 
-    def __init__(self, server_url, auth_token):
-        self.server_url = server_url
-        self.auth_token = auth_token
+    def __init__(self, base_url, auth_token):
+        self.base_url = base_url
+        self.session = Session()
+        self.session.headers.update({"Authorization": f"token {auth_token}"})
 
     def get(self, file_path):
-        asset_data_url = urljoin(self.server_url, "{0}/info".format(file_path))
-
+        asset_data_url = urljoin(self.base_url, "{0}/info".format(file_path))
         api_response = self._request("get", asset_data_url)
 
         return self._format_asset(api_response.json())
 
     def all(self, query_parameters={}):
-        url = self.server_url
+        url = self.base_url
 
         # Search, if requested
         if query_parameters:
@@ -115,7 +71,7 @@ class AssetMapper(object):
         )
 
     def update(self, file_path, tags):
-        asset_url = urljoin(self.server_url, file_path)
+        asset_url = urljoin(self.base_url, file_path)
 
         api_response = self._request("put", asset_url, data={"tags": tags})
 
@@ -123,7 +79,7 @@ class AssetMapper(object):
 
     def _create_asset(self, asset_data):
         api_response = self._request(
-            "post", self.server_url, data=asset_data, allowed_errors=[409]
+            "post", self.base_url, data=asset_data, allowed_errors=[409]
         )
 
         response = api_response.json()
@@ -147,27 +103,13 @@ class AssetMapper(object):
         return {
             "file_path": datum["file_path"],
             "tags": datum["tags"],
-            "url": urljoin(self.server_url, datum["file_path"]),
+            "url": urljoin(self.base_url, datum["file_path"]),
             "image": mimetype in self.image_types,
             "created": datum["created"],
         }
 
-    def _request(
-        self,
-        method,
-        url,
-        data=None,
-        headers={},
-        allowed_errors=[],
-        authorize_by_header=False,
-    ):
-        if self.auth_token:
-            if authorize_by_header:
-                headers["Authorization"] = "token {0}".format(self.auth_token)
-            else:
-                url = add_query_params(url, {"token": self.auth_token})
-
-        response = requests.request(
+    def _request(self, method, url, data=None, headers={}, allowed_errors=[]):
+        response = self.session.request(
             method=method, url=url, data=data, headers=headers
         )
 
