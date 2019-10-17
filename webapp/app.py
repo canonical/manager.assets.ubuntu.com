@@ -1,13 +1,17 @@
 import os
 
 import flask
-
 from canonicalwebteam.flask_base.app import FlaskBase
 from flask_wtf.csrf import CSRFProtect
 from requests.exceptions import RequestException
 
 from webapp.api import AssetAPI
+from webapp.sso import init_sso, login_required
 
+
+asset_api = AssetAPI(
+    os.getenv("ASSET_SERVER_URL"), os.getenv("ASSET_SERVER_TOKEN")
+)
 
 app = FlaskBase(
     __name__,
@@ -19,12 +23,11 @@ app = FlaskBase(
 csrf = CSRFProtect()
 csrf.init_app(app)
 
-asset_api = AssetAPI(
-    os.getenv("ASSET_SERVER_URL"), os.getenv("ASSET_SERVER_TOKEN")
-)
+init_sso(app)
 
 
 @app.route("/")
+@login_required
 def home():
     query = flask.request.args.get("q", "")
     asset_type = flask.request.args.get("type", "")
@@ -40,6 +43,7 @@ def home():
 
 
 @app.route("/create", methods=["GET", "POST"])
+@login_required
 def create():
     created_assets = []
     existing_assets = []
@@ -78,6 +82,7 @@ def create():
 
 
 @app.route("/update", methods=["GET", "POST"])
+@login_required
 def update():
     file_path = flask.request.args.get("file-path")
 
@@ -92,5 +97,6 @@ def update():
 
 
 @app.errorhandler(404)
+@login_required
 def error_404(error):
     return flask.render_template("404.html"), 404
