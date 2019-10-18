@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "sass-lint static/**/*.scss --verbose --no-exit",
+    "test": "yarn run lint-scss && yarn run lint-python",
     "lint-scss": "sass-lint static/**/*.scss --exclude node_modules --verbose --no-exit",
     "lint-python": "flake8 webapp/ && black --check --line-length 79 webapp/",
     "build": "node-sass --include-path node_modules static/sass --source-map true --output-style compressed --output static/css && postcss --map false --use autoprefixer --replace 'static/css/**/*.css'",
