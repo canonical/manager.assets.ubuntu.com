@@ -18,6 +18,8 @@ app = FlaskBase(
     "manager.assets.ubuntu.com",
     static_folder="../static",
     template_folder="../templates",
+    template_404="404.html",
+    template_500="500.html",
 )
 
 csrf = CSRFProtect()
@@ -94,9 +96,3 @@ def update():
         flask.flash("Tags updated", "positive")
 
     return flask.render_template("update.html", asset=asset)
-
-
-@app.errorhandler(404)
-@login_required
-def error_404(error):
-    return flask.render_template("404.html"), 404
