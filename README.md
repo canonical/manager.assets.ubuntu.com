@@ -15,14 +15,13 @@ The first time you run it, the script will ask you to choose a URL for the serve
 
 ``` bash
 $ ./run
-Enter the URL for the assets webservice (e.g. https://assets.staging.ubuntu.com, or http://localhost:8018):
-https://assets.staging.ubuntu.com
-Enter the authentication token for the assets webservice:
-xxxxxxxxxxx
 ```
 
-These settings will be stored in the `.local-env` file, and read from there.
-
+Set the following variables in your `.env.local`, you might need to ask around for a token.
+```
+ASSET_SERVER_URL=<url>
+ASSET_SERVER_TOKEN=<token>
+```
 Once the containers are setup, you can visit <http://127.0.0.1:8018> in your browser to see the web frontend for controlling the assets service.
 
 ### Building CSS
@@ -36,5 +35,3 @@ To setup the watcher, open a new terminal window and run:
 ```
 
 ---
-
-The champion for this project is [nottrobin](https://github.com/nottrobin).

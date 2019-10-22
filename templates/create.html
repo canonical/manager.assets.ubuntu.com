@@ -1,35 +1,20 @@
-{% extends "layout/default.html" %}
+{% extends "_layout.html" %}
 
 {% block title %}Create assets{% endblock %}
 
 {% block content %}
-<h1>Create assets</h1>
-
-{% if asset %}
-    <div class="asset">
-    {% include "includes/asset.html" %}
-    </div>
-{% endif %}
-
-<form method="post" enctype="multipart/form-data">
-  <fieldset>
-    <ul class="no-bulltes">
-      {% csrf_token %}
-      <li>
-        <input id="input-files" type="file" multiple name="assets" />
-      </li>
-      <li>
-        <label for="input-tags">Tags:</label>
-        <input id="input-tags" placeholder="e.g.: button, ubuntu" value="{{ tags }}" type="text" name="tags" />
-      </li>
-      <li>
-        <input id="input-optimize" {{ optimize|yesno:"checked,," }} type="checkbox" name="optimize" />
-        <label for="input-optimize">Optimize images:</label>
-      </li>
-      <li>
-        <button type="submit">Submit</button>
-      </li>
-    </ul>
-  </fieldset>
-</form>
+<div class="row">
+  <div class="col-6">
+    <h2>Create asset(s)</h2>
+    <form method="post" enctype="multipart/form-data">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+      <input id="input-files" type="file" multiple name="assets" />
+      <label for="input-tags">Tags:</label>
+      <input id="input-tags" placeholder="e.g.: button, ubuntu" value="{{ tags }}" type="text" name="tags" />
+      <input id="input-optimize" {% if optimize %} checked {% endif%} type="checkbox" name="optimize" />
+      <label for="input-optimize">Optimize images</label>
+      <button class="p-button--positive" type="submit">Submit</button>
+    </form>
+  </div>
+</div>
 {% endblock %}

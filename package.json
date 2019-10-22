@@ -2,14 +2,21 @@
   "scripts": {
     "test": "yarn run lint-scss && yarn run lint-python",
     "lint-scss": "sass-lint static/**/*.scss --exclude node_modules --verbose --no-exit",
-    "lint-python": "flake8 assets_manager/ scripts/ && black --check --line-length 79 assets_manager/ scripts/",
-    "build": "scripts/setup-env.sh && node-sass --include-path node_modules static/sass --output static/css",
-    "watch": "node-sass --include-path node_modules --source-map true --watch static/sass --output static/css",
+    "lint-python": "flake8 webapp/ && black --check --line-length 79 webapp/",
+    "build": "node-sass --include-path node_modules static/sass --source-map true --output-style compressed --output static/css && postcss --map false --use autoprefixer --replace 'static/css/**/*.css'",
+    "watch": "watch -p 'static/sass/**/*.scss' -c 'yarn run build'",
     "serve": "./entrypoint 0.0.0.0:${PORT}",
-    "clean": "rm -rf node_modules yarn-error.log static/css *.log *.sqlite _site/ build/ .jekyll-metadata"
+    "clean": "rm -rf node_modules yarn-error.log css static/css *.log *.sqlite _site/ build/ .jekyll-metadata .bundle"
   },
   "devDependencies": {
     "node-sass": "4.11.0",
     "sass-lint": "1.12.1"
+  },
+  "dependencies": {
+    "watch-cli": "^0.2.2",
+    "sass-lint": "^1.10.2",
+    "postcss-cli": "^4.1.0",
+    "node-sass": "^4.5.3",
+    "autoprefixer": "^6.3.1"
   }
 }
