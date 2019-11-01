@@ -1,16 +1,15 @@
 <div class="col-4 p-card">
-    <a href="/update?file-path={{ asset.file_path }}">
-        <p class="p-card__title">{{asset.file_path}}</p>
-    </a>
-    <div class="p-card__content">
-        <p><span>Tags: {{ asset.tags|default("None", true) }}</span></p>
-        <p><span>Created: {{ asset.created }}</span></p>
-        {% if asset.image %}
-        <div>
-            <a href="{{ asset.url }}" target="_blank">
-                <img class="p-image--bordered" src="{{ asset.url }}" style="max-width: 100px; max-height: 100px;">
-            </a>
-        </div>
-        {% endif %}
-    </div>
+  {% if asset.image %}
+  <a href="{{ asset.url }}" target="_blank">
+    <img class="p-card__thumbnail p-image--bordered asset-thumbnail" src="{{ asset.url }}">
+  </a>
+  <hr class="u-sv1">
+  {% endif %}
+  <div class="p-card__content">
+    <p><strong>{{ asset.file_path }}</strong></p>
+    <p><span>Tags: {{ asset.tags|default("None", true) }}</span></p>
+    <p><span>Created: {{ asset.created }}</span></p>
+    <button class="p-button--positive copy-link" data-url="{{ asset.url }}">Copy Link</button>
+    <a class="p-button--neutral" href="/update?file-path={{ asset.file_path }}">Edit Tags</a>
+  </div>
 </div>
