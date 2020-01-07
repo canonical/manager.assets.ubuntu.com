@@ -2,4 +2,4 @@ canonicalwebteam.flask-base==0.3.3
 django-openid-auth==0.15
 Flask-OpenID-Stateless==1.2.6
 Flask-WTF==0.14.2
-requests==2.21.0
+requests==2.22.0
