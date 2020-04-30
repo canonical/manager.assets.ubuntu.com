@@ -11,11 +11,11 @@
     "clean": "rm -rf node_modules yarn-error.log css static/css *.log *.sqlite _site/ build/ .jekyll-metadata .bundle"
   },
   "dependencies": {
-    "autoprefixer": "9.7.3",
-    "node-sass": "4.13.0",
-    "postcss-cli": "7.0.0",
+    "autoprefixer": "9.7.6",
+    "node-sass": "4.14.0",
+    "postcss-cli": "7.1.1",
     "sass-lint": "1.13.1",
-    "vanilla-framework": "2.5.0",
+    "vanilla-framework": "2.10.1",
     "watch-cli": "0.2.3"
   }
 }
