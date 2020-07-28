@@ -6,13 +6,13 @@ env:
   - name: ASSET_SERVER_URL
     value: https://assets.ubuntu.com/v1/
 
+  - name: SENTRY_DSN
+    value: https://7caf63ec2bb74f3b99e51cf7d9a3d75b@sentry.is.canonical.com//33
+
   - name: ASSET_SERVER_TOKEN
     secretKeyRef:
       key: asset_server_token
       name: manager-assets-ubuntu-com
-
-  - name: SENTRY_DSN
-    value: https://7caf63ec2bb74f3b99e51cf7d9a3d75b@sentry.is.canonical.com//33
 
 # Overrides for production
 production:
