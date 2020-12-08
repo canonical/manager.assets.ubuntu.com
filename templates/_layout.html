@@ -38,9 +38,25 @@
     {% endblock %}
   </main>
   <script>
-    function copyToClipboard(str) {
+    function image_tag(str,callback) {
+      const img = new Image();
+      img.onload = function () {
+        callback('\{\{ image \(          url="' + str + '",          alt="",          width="' + this.width + '",          height="' + this.height + '",          hi_def=True,          loading="auto|lazy"          \) \| safe        \}\}');
+      };
+      img.src = str;
+    }
+
+    function copyToClipboard(str,type) {
       var el = document.createElement('textarea'); // Create a <textarea> element
-      el.value = str; // Set its value to the string that you want copied
+      if (type === "image_tag") {
+        image_tag(str, function(tag){
+          el.value = tag;
+          alert(el.value);
+        });
+      } else {
+        el.value = str;
+      }
+
       el.setAttribute('readonly', ''); // Make it readonly to be tamper-proof
       el.style.position = 'absolute';
       el.style.left = '-9999px'; // Move outside the screen to make it invisible
@@ -66,7 +82,7 @@
       copyButton.addEventListener(
         'click',
         function (e) {
-          copyToClipboard(e.target.dataset.url);
+          copyToClipboard(e.target.dataset.url, e.target.dataset.type);
         },
         false
       );
