@@ -38,6 +38,27 @@
     {% endblock %}
   </main>
   <script>
+    function generateImageTag(str) {
+      const img = new Image();
+      img.onload = function () {
+        imageLoadHandler(`
+          \{\{ image \(
+            url="${str}",
+            alt="",
+            width="${this.width}",
+            height="${this.height}",
+            hi_def=True,
+            loading="auto|lazy"
+            \) \| safe
+          \}\}`);
+      };
+      img.src = str;
+    }
+
+    function imageLoadHandler(imageTagContent) {
+      copyToClipboard(imageTagContent);
+    }
+
     function copyToClipboard(str) {
       var el = document.createElement('textarea'); // Create a <textarea> element
       el.value = str; // Set its value to the string that you want copied
@@ -60,6 +81,13 @@
         document.getSelection().addRange(selected); // Restore the original selection
       }
     };
+
+    var imageTagButtons = document.querySelectorAll('.js-copy-image-tag');
+    imageTagButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        generateImageTag(e.target.dataset.url);
+      });
+    });
 
     var copyButtons = document.querySelectorAll('.copy-link');
     for (var copyButton of copyButtons) {
