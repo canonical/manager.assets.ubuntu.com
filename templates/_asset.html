@@ -11,8 +11,8 @@
     <p><span>Created: {{ asset.created }}</span></p>
     <p>
       <small>Copy:</small>
-      <button class="p-button--positive copy-link is-inline" data-url="{{ asset.url }}" data-type="copy">Link</button>
-      <button class="p-button copy-link" data-url="{{ asset.url }}" data-type="image_tag">Image tag</button>
+      <button class="p-button--positive copy-link is-inline" data-url="{{ asset.url }}">Link</button>
+      <button class="p-button js-copy-image-tag" data-url="{{ asset.url }}">Image tag</button>
     </p>
   </div>
 </div>
