@@ -1067,6 +1067,11 @@ js-yaml@^3.4.6, js-yaml@^3.5.1, js-yaml@^3.5.4:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
+json-parse-better-errors@^1.0.1:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz#bb867cfb3450e69107c131d1c514bab3dc8bcaa9"
+  integrity sha512-mrqyZKfX5EhL7hvqcV6WG1yYjnjeuYDzDhhcAAUrq8Po85NBQBJP+ZDUT75qZQ98IkUoBqdkExkukOU7Ts2wrw==
+
 json-parse-even-better-errors@^2.3.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/json-parse-even-better-errors/-/json-parse-even-better-errors-2.3.1.tgz#7c47805a94319928e05777405dc12e1f7a4ee02d"
@@ -1863,10 +1868,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vanilla-framework@2.24.1:
-  version "2.24.1"
-  resolved "https://registry.yarnpkg.com/vanilla-framework/-/vanilla-framework-2.24.1.tgz#6160504ded025359ae6d959a1bec6ff4259ebb21"
-  integrity sha512-ib/0/NQCXY8jslpzK67TwocM/PYQeiz/whr39TT/hLHEIAMMLyY2JDoQd6uo3mnamV5PYKTj84VDM1BWEDm7+Q==
+vanilla-framework@2.26.0:
+  version "2.26.0"
+  resolved "https://registry.yarnpkg.com/vanilla-framework/-/vanilla-framework-2.26.0.tgz#6e173f3063e302282c2e0246ee42e5fa6d0ccc20"
+  integrity sha512-IJhIl7Bmy+nDk+E7LhAql662iKMRtlIoX43so1kJmUYcTlqMnrtqTBJ7hH2/ngzNrkZM9Riwrie6z7twEUbSNA==
 
 verbalize@^0.1.2:
   version "0.1.2"
