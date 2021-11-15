@@ -5,17 +5,16 @@
 {% block content %}
 <div class="p-strip is-shallow">
   <div class="row">
-    <div class="col-6">
+    <div class="col-8">
       <h2>Create asset(s)</h2>
-      <form method="post" enctype="multipart/form-data">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-        <input id="input-files" type="file" multiple name="assets" />
-        <label for="input-tags">Tags:</label>
-        <input id="input-tags" placeholder="e.g.: button, ubuntu" value="{{ tags }}" type="text" name="tags" />
-        <input id="input-optimize" {% if optimize %} checked {% endif%} type="checkbox" name="optimize" />
-        <label for="input-optimize">Optimize images</label>
-        <button class="p-button--positive" type="submit">Submit</button>
-      </form>
+      <div class="p-notification--caution">
+        <div class="p-notification__content">
+          <h5 class="p-notification__title">Temporarily disabled</h5>
+          <p class="p-notification__message">As we are upgrading the assets server, creating new assets is momentarily disabled.
+          <br/>  
+          For more info you can reach to us on mattermost: <a href="https://chat.canonical.com/canonical/channels/web--design">~Web & design</a>.</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
