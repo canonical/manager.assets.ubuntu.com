@@ -16,7 +16,7 @@
       <div class="p-navigation__banner">
         <div class="p-navigation__logo">
           <a class="p-navigation__link" href="/">
-            <img class="p-navigation__image" src="https://assets.ubuntu.com/v1/c4f35e06-products-hero-ubuntu.svg">
+            <img class="p-navigation__image" alt="Asset manager" src="https://assets.ubuntu.com/v1/c4f35e06-products-hero-ubuntu.svg">
           </a>
         </div>
         <a href="#navigation" class="p-navigation__toggle--open" title="menu">Menu</a>
@@ -26,9 +26,9 @@
         <span class="u-off-screen">
           <a href="#main-content">Jump to main content</a>
         </span>
-        <ul class="p-navigation__links" role="menu">
-          <li class="p-navigation__link p-nav"><a href="/">Search assets</a></li>
-          <li class="p-navigation__link p-nav"><a href="/create">Create asset(s)</a></li>
+        <ul class="p-navigation__items">
+          <li class="p-navigation__item {% if request.path == '/' %}is-selected{% endif %}"><a class="p-navigation__link" href="/">Search assets</a></li>
+          <li class="p-navigation__item {% if request.path == '/create' %}is-selected{% endif %}"><a class="p-navigation__link" href="/create">Create asset(s)</a></li>
         </ul>
       </nav>
     </div>
