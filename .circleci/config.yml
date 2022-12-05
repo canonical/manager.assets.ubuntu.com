@@ -2,7 +2,7 @@ version: 2
 
 defaults: &defaults
   docker:
-    - image: canonicalwebteam/dev
+    - image: cimg/python:3.8-node
       environment:
         SECRET_KEY: local_development_fake_key
 
