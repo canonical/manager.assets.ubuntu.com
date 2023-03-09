@@ -31,7 +31,7 @@ FROM ubuntu:jammy
 ADD . .
 # Install python and import python dependencies
 RUN apt-get update && apt-get install --no-install-recommends --yes python3-setuptools python3-lib2to3 python3-pkg-resources ca-certificates libsodium-dev
-COPY --from=python-dependencies /root/.local/lib/python3.10/site-packages /root/.local/lib/python3.10f/site-packages
+COPY --from=python-dependencies /root/.local/lib/python3.10/site-packages /root/.local/lib/python3.10/site-packages
 COPY --from=python-dependencies /root/.local/bin /root/.local/bin
 ENV PATH="/root/.local/bin:${PATH}"
 
