@@ -1,3 +1,11 @@
+**Archived**
+
+The domain `manager.assets.ubuntu.com` [is now redirected by the assets.ubuntu.com service](https://github.com/canonical/assets.ubuntu.com/blob/main/konf/site.yaml#L58) to assets.ubuntu.com/manager and the manager [is served entirely](https://github.com/canonical/assets.ubuntu.com/blob/main/webapp/routes.py#L36) from that application.
+
+This app is no longer used.
+
+---
+
 # Assets manager
 [![CircleCI build status](https://circleci.com/gh/canonical-web-and-design/manager.assets.ubuntu.com.svg?style=shield)](https://circleci.com/gh/canonical-web-and-design/manager.assets.ubuntu.com) [![Code coverage](https://codecov.io/gh/canonical-web-and-design/manager.assets.ubuntu.com/branch/main/graph/badge.svg)](https://codecov.io/gh/canonical-web-and-design/manager.assets.ubuntu.com)
 
